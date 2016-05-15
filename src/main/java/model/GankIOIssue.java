@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 干货日报
+ * 一期干货
  * <p>
  * hujiawei 16/4/28
  */
 public class GankIOIssue {
 
     private int num;//编号
-    private String id;//id -> 不再需要
+    private String id;//id
     private String url;//网址
-    private String title;//标题 -> 不再需要
-    private String file;//文件路径 -> 不再需要
+    private String title;//标题
+    private String file;//文件路径
     private List<GankIOItem> items;//日报中的item列表
 
     public GankIOIssue() {

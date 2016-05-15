@@ -4,31 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 周报中的一个item
- * <p>
- * 编号：id <- md5(url)
- * 网址：url
- * 短址：shortUrl
- * 标题：title
- * 类型：type，可能是 article，library，news，video，app，design，tool，screencast，job，sponsored，event等
- * 摘要：summary <- 可能没有，没有就自动提取
- * 来源：source <- android weekly issue #100
- * 内容：content
- * 标签：tags
+ * 一条干货
  * <p>
  * hujiawei 16/4/27
  */
 public class GankIOItem {
 
-    private String id;
-    private String url;
-    private String shortUrl;//-> 不再需要
-    private String title;
-    private String summary;//-> 不再需要
-    private String content;
-    private String source;
-    private String type;
-    private List<String> tags;
+    private String id;//编号
+    private String url;//网址
+    private String shortUrl;//短网址
+    private String title;//标题
+    private String summary;//摘要
+    private String content;//内容
+    private String source;//来源
+    private String type;//类型
+    private List<String> tags;//标签
 
     public GankIOItem() {
         tags = new ArrayList<String>();
