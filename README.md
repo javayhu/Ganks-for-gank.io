@@ -64,7 +64,9 @@ The root of the json data is a JSON array containing all the weekly issues poste
 ]
 ```
 
-## The website included ([See the preview site](http://ganks-for-gankio.herokuapp.com/))
+## The website included 
+
+The website included is deployed to Heroku, [see the preview site](http://ganks-for-gankio.herokuapp.com/).
 
 The simple website included in this project is just a page showing the statistics information about the result data.    
 You can find out more interesting usages with the result data, such as a powerful search engine based on these data, which in still under development in my other project.  
