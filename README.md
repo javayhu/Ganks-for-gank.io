@@ -5,7 +5,7 @@ This project is simply modified from another project named [Ganks-for-andoirdwee
 
 This project fetches daily newsletters created by [gank.io](http://gank.io/), which shares technical ganks every weekday.
 
-This project not only parses the post items in one daily issue, but also extracts the main content of each post item's web page for you.
+This project not only parses the post items in one daily issue, but also extracts the main content of each post item's web page for you. Sounds good?
 
 ## Two main models
 
@@ -45,15 +45,6 @@ The root of the json data is a JSON array containing all the weekly issues poste
 		"id":"2016-05-13",
 		"items":[
 			{
-				"content":"Redirecting… Redirecting… Click here if you are not redirected.",
-				"id":"56cc6d23421aa95caa707a19",
-				"source":"Gank.io #237 (2016-05-13)",
-				"tags":[],
-				"title":"Swift 中 #available 检测接口是否可用",
-				"type":"iOS",
-				"url":"http://szulctomasz.com/swift-2-check-availability/"
-			},
-			{
 				"content":"Using Blocks to Realize the Strategy Pattern Jul 10th, 2015 There’s this saying that the Strategy pattern can be realized in Swift using blocks. Without blocks, a Strategy object implements usually one required method of an interface (or protocol) to encapsulate a variation of behavior. This behavior can be switched at runtime. It’s like a\u00A0plug-in. Well, blocks can do the same. They can become attributes of an object and be switched out. They also capture context if necessary, which may sometimes be a bonus. The only drawback is that blocks can’t encapsulate state of their own except the captured\u00A0context. Here’s a real-world example from a recent project. It’s a work break timer. It deals with two types of timers, realized via dispatch queues: one for work, and one for breaks. The break timer should restart when it’s prolonged, the work timer should continue to tick if it’s started, or start itself if it wasn’t\u00A0already. Here’s a Strategy-based version of the difference in prolongation\u00A0behavior: protocol TimerProlongationStrategy { func prolong ( timer : TimerType ) } struct StartOnceTimerProlongationStrategy : TimerProlongationStrategy { func prolong ( timer : TimerType ) { if timer . isActive { return } timer . start () } } struct ResetTimerProlongationStrategy : TimerProlongationStrategy { func prolong ( timer : TimerType ) { if timer . isActive { timer . prolong () return } timer . stop () timer . start () } } That’s very verbose, but it’s straightforward to\u00A0use: class TimerCoordinator { var workTimer : Timer ! var breakTimer : Timer ! init ( workDuration : Minutes , breakDuration : Minutes ) { self . workTimer = Timer ( duration : workDuration . seconds , scheduler : self , prolongationStrategy : StartOnceTimerProlongationStrategy (), block : finishWork ) self . breakTimer = Timer ( duration : breakDuration . seconds , scheduler : self , prolongationStrategy : ResetTimerProlongationStrategy (), block : finishBreak ) } } Instead of setting up two Timer types, I can use one type and delegate variation to the prolongationStrategy \u00A0attribute. With blocks put in place of Strategy objects, it would look like\u00A0this: class TimerCoordinator { var workTimer : Timer ! var breakTimer : Timer ! init ( workDuration : Minutes , breakDuration : Minutes ) { self . workTimer = Timer ( duration : workDuration . seconds , scheduler : self , prolongationStrategy : { timer in if timer . isActive { return } timer . start () }, block : finishWork ) self . breakTimer = Timer ( duration : breakDuration . seconds , scheduler : self , prolongationStrategy : { timer in if timer . isActive { timer . prolong () return } timer . stop () timer . start () }, block : finishBreak ) } } That does read even worse than the version\u00A0before! But notice that I’ve referenced finishWork and finishBreak respectively as the last argument of the initializer. Instead of a () -> Void block, I pass in the reference to a method of\u00A0 TimerCoordinator . Strategies don’t have to be realized as in-line blocks or objects. They can be realized as methods or free functions,\u00A0too. Using functions (because methods don’t make much sense for this use case), the full code will look like\u00A0this: func startOnceTimerProlongationStrategy ( timer : Timer ) { if timer . isActive { return } timer . start () } func resetTimerProlongationStrategy ( timer : Timer ) { if timer . isActive { timer . prolong () return } timer . stop () timer . start () } class TimerCoordinator { var workTimer : Timer ! var breakTimer : Timer ! init ( workDuration : Minutes , breakDuration : Minutes ) { self . workTimer = Timer ( duration : workDuration . seconds , scheduler : self , prolongationStrategy : startOnceTimerProlongationStrategy , block : finishWork ) self . breakTimer = Timer ( duration : breakDuration . seconds , scheduler : self , prolongationStrategy : resetTimerProlongationStrategy , block : finishBreak ) } } This gets around inline blocks which are hard to read and doesn’t introduce unnecessary\u00A0objects. Blocks are nice as they are, but functions as first-class citizens of Swift are even nicer because handles to them can be passed instead of\u00A0blocks. Using functions for this will work only if you don’t need to have stateful Strategy instances. In my case, the Strategy objects were simple wrappers around real functions, so it worked\u00A0nicely.",
 				"id":"56cc6d23421aa95caa707a1c",
 				"source":"Gank.io #237 (2016-05-13)",
@@ -78,7 +69,9 @@ The root of the json data is a JSON array containing all the weekly issues poste
 The simple website included in this project is just a page showing the statistics information about the result data.    
 You can find out more interesting usages with the result data, such as a powerful search engine based on these data, which in still under development in my other project.  
 
-Run `mvn exec:java -Dexec.mainClass="web.WebServer` and open `http://0.0.0.0:4567/` in your browser, you will see this web page.
+1.Run `mvn exec:java -Dexec.mainClass="web.WebServer`  
+
+2.Open `http://0.0.0.0:4567/` in your browser, and you will see this web page.
 
 ![image](gankio.png)
 
