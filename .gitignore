@@ -1,0 +1,8 @@
+target
+.env
+.idea/
+*.iml
+src/main/resources/androidweeklynetarchive
+src/main/resources/androidweeklynetdb
+src/main/resources/backup
+src/main/test/resources
