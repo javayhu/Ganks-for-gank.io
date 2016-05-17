@@ -3,13 +3,17 @@
 
 This project is simply modified from another project named [Ganks-for-andoirdweekly.net](https://github.com/hujiaweibujidao/Ganks-for-andoirdweekly.net) of mine.
 
-This project fetches daily newsletters created by [gank.io](http://gank.io/), which shares technical ganks every weekday.
+This project fetches daily newsletters created by [gank.io](http://gank.io/), which shares technical ganks(干货) every weekday.
 
 `Ganks for gank.io` not only parses the post items in one daily issue, but also extracts the main content of each post item's web page for you. Sounds good?
 
-This project also provides a web search API based on Lucene and these ganks, and the web application is now deployed on Heroku platform. [see the site](http://ganks-for-gankio.herokuapp.com/)
+This project also provides a web search API based on Lucene and these ganks, and the web application is now deployed on Heroku platform. [see the site](http://ganks-for-gankio.herokuapp.com/)   
 
-**中文简介：`Ganks for gank.io`项目利用Gank的API来获取干货列表，不仅如此，该项目还利用dragnet开源工具提取每一个干货的目标网页内容，最终利用Lucene和干货数据提供一个高效的干货搜索接口，并将其部署在Heroku平台。**
+Since I'm currently in free plan of Heroku, so this site is 16/24 housr available, good luck! 
+
+**中文简介：`Ganks for gank.io`项目利用Gank的API来获取干货列表，不仅如此，该项目还利用dragnet开源工具提取每一个干货的目标网页内容，最终利用Lucene开源工具提供一个高效的干货搜索接口，并将其部署在Heroku平台。**
+
+**目前我的Heroku账号处于free plan，所以应用每24个小时会有8个小时处于停止状态，所以祝你好运！**
 
 ## Two main models
 
@@ -72,8 +76,8 @@ The root of the json data is a JSON array containing all the weekly issues poste
 
 The website included is deployed to Heroku, [see the preview site](http://ganks-for-gankio.herokuapp.com/).
 
-The simple website included in this project is just a page showing the statistics information about the result data.    
-You can find out more interesting usages with the result data, such as a powerful search engine based on these data, which in still under development in my other project.  
+The simple website included in this project is just a page showing the statistics information about the ganks, besides that, it provides a web search API based on Lucene and these ganks.      
+You can find out more interesting usages with the result data. :-)
 
 1.Run `mvn exec:java -Dexec.mainClass="web.WebServer`   
 2.Open `http://0.0.0.0:4567/` in your browser, and you will see this web page.
