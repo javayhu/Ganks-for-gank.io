@@ -1,7 +1,7 @@
 
 # Ganks for gank.io
 
-This project is simply modified from another project named [Ganks-for-andoirdweekly.net](https://github.com/hujiaweibujidao/Ganks-for-andoirdweekly.net) of mine.
+**This project is simply modified from another project named [Ganks-for-andoirdweekly.net](https://github.com/hujiaweibujidao/Ganks-for-andoirdweekly.net) of mine.**
 
 This project fetches daily newsletters created by [gank.io](http://gank.io/), which shares technical ganks(干货) every weekday.
 
@@ -88,7 +88,7 @@ You can find out more interesting usages with the result data. :-)
 
 Many famous open source libraries are used in this project, including `crawler4j`,  `fastjson`, `jsoup`, `velocity`, `spark` and so on.
 
-Two tools are much more important, one is [dragnet](https://github.com/seomoz/dragnet), which is a Python library used to extract the content of a web page. The other is [sessiondb](https://github.com/ctriposs/sessdb), which is a Big, Fast, Persistent Key/Value Store based on a variant of LSM, you can find more about it [here](http://ctriposs.github.io/sessdb/).
+Two tools are much more important, one is [dragnet](https://github.com/seomoz/dragnet), which is a Python library used to extract the content of a web page. The other is [sessiondb](https://github.com/ctriposs/sessdb), which is a Big, Fast, Persistent Key/Value Store based on a variant of LSM, you can find out more details about it [here](http://ctriposs.github.io/sessdb/).
 
 ## License
 
