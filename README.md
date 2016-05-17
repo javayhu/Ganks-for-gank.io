@@ -9,11 +9,11 @@ This project fetches daily newsletters created by [gank.io](http://gank.io/), wh
 
 This project also provides a web search API based on Lucene and these ganks, and the web application is now deployed on Heroku platform. [see the site](http://gankio.herokuapp.com/)   
 
-Since I'm currently in free plan of Heroku, so this site is 16/24 housr available, good luck! 
+Since I'm currently in free plan of Heroku, so this site is 16/24 housr available, good luck!
 
 **中文简介：`Ganks for gank.io`项目利用Gank的API来获取干货列表，不仅如此，该项目还利用dragnet开源工具提取每一个干货的目标网页内容，最终利用Lucene开源工具提供一个高效的干货搜索接口，并将其部署在Heroku平台。**
 
-**目前我的Heroku账号处于free plan，所以应用每24个小时会有8个小时处于停止状态，所以祝你好运！**
+**目前我的Heroku账号处于free plan，所以应用每24个小时会有几个小时处于停止状态，所以祝你好运！**
 
 ## Two main models
 
@@ -62,7 +62,7 @@ The root of the json data is a JSON array containing all the weekly issues poste
 				"url":"http://christiantietze.de/posts/2015/07/strategy-blocks/"
 			},
         ...
-        
+
 		],
 		"num":237,
 		"title":"Gank.io #237 (2016-05-13)",
@@ -72,7 +72,7 @@ The root of the json data is a JSON array containing all the weekly issues poste
 ]
 ```
 
-## The website included 
+## The website included
 
 The website included is deployed to Heroku, [see the preview site](http://gankio.herokuapp.com/).
 
