@@ -7,7 +7,7 @@ This project fetches daily newsletters created by [gank.io](http://gank.io/), wh
 
 `Ganks for gank.io` not only parses the post items in one daily issue, but also extracts the main content of each post item's web page for you. Sounds good?
 
-This project also provides a web search API based on Lucene and these ganks, and the web application is now deployed on Heroku platform. [see the site](http://ganks-for-gankio.herokuapp.com/)   
+This project also provides a web search API based on Lucene and these ganks, and the web application is now deployed on Heroku platform. [see the site](http://gankio.herokuapp.com/)   
 
 Since I'm currently in free plan of Heroku, so this site is 16/24 housr available, good luck! 
 
@@ -74,7 +74,7 @@ The root of the json data is a JSON array containing all the weekly issues poste
 
 ## The website included 
 
-The website included is deployed to Heroku, [see the preview site](http://ganks-for-gankio.herokuapp.com/).
+The website included is deployed to Heroku, [see the preview site](http://gankio.herokuapp.com/).
 
 The simple website included in this project is just a page showing the statistics information about the ganks, besides that, it provides a web search API based on Lucene and these ganks.      
 You can find out more interesting usages with the result data. :-)
