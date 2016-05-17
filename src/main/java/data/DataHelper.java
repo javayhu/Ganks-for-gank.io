@@ -14,8 +14,8 @@ public class DataHelper {
 
     static Logger logger = LoggerFactory.getLogger(DataHelper.class);
 
-    public static final String GANKIO_JSON = "src/main/resources/gankio.json";
-    public static final String GANKIO_EXCEL = "src/main/resources/gankio.xlsx";
+    public static final String GANKIO_JSON = "src/main/resources/data/gankio.json";
+    public static final String GANKIO_EXCEL = "src/main/resources/data/gankio.xlsx";
 
     /**
      * 保存网页内容
@@ -98,7 +98,7 @@ public class DataHelper {
     /**
      * 判断是否需要忽略该url --> 提取出来，放在文件中进行配置
      * <p>
-     * 有些网址无法访问，有些访问时会被重定向
+     * 有些网址无法访问，有些访问时会被重定向。下面列举的域名是从andrdoidweekly.net中保留下来的
      * <p>
      * antonioleiva.com 可能有结果，可能出错，也可能会导致解析停止？ eg. http://antonioleiva.com/collapsing-toolbar-layout/
      * https://www.androidexperiments.com/ 只有一个android logo

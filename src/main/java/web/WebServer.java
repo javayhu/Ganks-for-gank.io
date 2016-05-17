@@ -1,6 +1,10 @@
 package web;
 
-import model.GankIOItem;
+import data.GankHub;
+import model.GankItem;
+import org.apache.lucene.document.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.ModelAndView;
 import tool.CountInfo;
 import tool.JsonTransformer;
@@ -19,9 +23,21 @@ import static spark.Spark.*;
  */
 public class WebServer {
 
+    private Logger logger = LoggerFactory.getLogger(WebServer.class);
+    private GankHub gankHub;
+
     public static void main(String[] args) {
+        WebServer server = new WebServer();
+        server.startServer();
+    }
+
+    /**
+     * 启动服务器
+     */
+    private void startServer() {
         CountInfo countInfo = StatTool.count();
 
+        //设置端口
         if (System.getenv("PORT") != null) {
             port(Integer.valueOf(System.getenv("PORT")));
         }
@@ -37,25 +53,40 @@ public class WebServer {
             return new ModelAndView(model, "public/html/index.vm");
         }, new VelocityTemplateEngine());
 
-        //search
-        get("/search/:term", (request, response) -> search(request.params(":term")), new JsonTransformer());
+        //search action
+        post("/search", (request, response) -> search(request.queryParams("keyword")), new JsonTransformer());
 
+        gankHub = new GankHub();
+        gankHub.startService();
+
+        logger.info("server started");
     }
 
     /**
      * 搜索
      *
-     * @param term 搜索词
+     * @param keyword 搜索词
      */
-    private static Object search(String term) {
-        List<GankIOItem> result = new ArrayList<GankIOItem>();
-        List<GankIOItem> itemList = StatTool.getItems();
-        for (GankIOItem item : itemList) {
-            if (item.getTitle().toLowerCase().contains(term.toLowerCase())) {
-                result.add(item);
-            }
+    private Object search(String keyword) {
+        logger.info("search:" + keyword);
+        List<GankItem> gankItems = new ArrayList<GankItem>();
+        try {
+            List<Document> documents = gankHub.search(keyword);
+            documents.forEach(document -> {
+                GankItem item = new GankItem();
+                item.setTags(null);
+                item.setUrl(document.getField(GankHub.FIELD_URL).stringValue());
+                item.setTitle(document.getField(GankHub.FIELD_TITLE).stringValue());
+                item.setSource(document.getField(GankHub.FIELD_SOURCE).stringValue());
+                gankItems.add(item);
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return result;
+
+        return gankItems;
     }
+
+    //如何关闭呢
 
 }

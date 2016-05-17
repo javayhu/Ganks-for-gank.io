@@ -6,8 +6,8 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import model.GankIOIssue;
-import model.GankIOItem;
+import model.GankIssue;
+import model.GankItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -37,7 +37,7 @@ public class GankIOAPI {
         GankIOAPI gankIOAPI = new GankIOAPI();
         try {
             logger.info("load issues from gank.io");
-            List<GankIOIssue> issues = gankIOAPI.loadGankIOIssues();
+            List<GankIssue> issues = gankIOAPI.loadGankIOIssues();
             gankIOAPI.loadGankIOItems(issues);
             System.out.println(JSON.toJSONString(issues, true));
 
@@ -49,16 +49,16 @@ public class GankIOAPI {
     }
 
     //获取所有GankIOIssue下的所有GankIOItem
-    private void loadGankIOItems(List<GankIOIssue> issues) throws UnirestException {
-        for (GankIOIssue issue : issues) {
+    private void loadGankIOItems(List<GankIssue> issues) throws UnirestException {
+        for (GankIssue issue : issues) {
             issue.setItems(loadGankIOItemsWithIssue(issue));
         }
     }
 
     //加载某个GankIOIssue下的GankIOItem
-    private List<GankIOItem> loadGankIOItemsWithIssue(GankIOIssue issue) throws UnirestException {
+    private List<GankItem> loadGankIOItemsWithIssue(GankIssue issue) throws UnirestException {
         logger.info("load items from issue: " + issue.getTitle());
-        List<GankIOItem> items = new ArrayList<GankIOItem>();
+        List<GankItem> items = new ArrayList<GankItem>();
         String urlSuffix = issue.getId().replaceAll("-", "/");
         HttpResponse<JsonNode> jsonResponse = Unirest.get(API_GANKS + urlSuffix).asJson();
         JSONObject jsonObject = jsonResponse.getBody().getObject();
@@ -67,7 +67,7 @@ public class GankIOAPI {
         for (int i = 0; i < categories.length(); i++) {
             JSONArray array = results.getJSONArray(categories.getString(i));
             for (int j = 0; j < array.length(); j++) {
-                GankIOItem item = parseItem(array.getJSONObject(j), issue);
+                GankItem item = parseItem(array.getJSONObject(j), issue);
                 if (null != item) items.add(item);
             }
         }
@@ -75,8 +75,8 @@ public class GankIOAPI {
     }
 
     //解析item json得到GankIOItem对象
-    private GankIOItem parseItem(JSONObject jsonObject, GankIOIssue issue) {
-        GankIOItem item = new GankIOItem();
+    private GankItem parseItem(JSONObject jsonObject, GankIssue issue) {
+        GankItem item = new GankItem();
         item.setType(jsonObject.getString("type"));
         if (DataHelper.isIgnoredType(item.getType())) {
             return null;
@@ -98,8 +98,8 @@ public class GankIOAPI {
     }
 
     //加载所有的GankIOIssue
-    private List<GankIOIssue> loadGankIOIssues() throws UnirestException {
-        List<GankIOIssue> issues = new ArrayList<GankIOIssue>();
+    private List<GankIssue> loadGankIOIssues() throws UnirestException {
+        List<GankIssue> issues = new ArrayList<GankIssue>();
         HttpResponse<JsonNode> jsonResponse = Unirest.get(API_DATES).asJson();
         JSONObject jsonObject = jsonResponse.getBody().getObject();
         JSONArray results = jsonObject.getJSONArray("results");
@@ -112,8 +112,8 @@ public class GankIOAPI {
     }
 
     //由日期来生成一个GankIOIssue对象
-    private GankIOIssue parseIssue(String date, int num) {
-        GankIOIssue issue = new GankIOIssue();
+    private GankIssue parseIssue(String date, int num) {
+        GankIssue issue = new GankIssue();
         issue.setId(date);//id和title也可以不设置，这里将日期作为id，自定义一个名称作为title
         issue.setNum(num);//第多少期
         String urlSuffix = date.replaceAll("-", "/");

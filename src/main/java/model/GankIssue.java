@@ -8,17 +8,17 @@ import java.util.List;
  * <p>
  * hujiawei 16/4/28
  */
-public class GankIOIssue {
+public class GankIssue {
 
     private int num;//编号
     private String id;//id
     private String url;//网址
     private String title;//标题
     private String file;//文件路径
-    private List<GankIOItem> items;//日报中的item列表
+    private List<GankItem> items;//日报中的item列表
 
-    public GankIOIssue() {
-        this.items = new ArrayList<GankIOItem>();
+    public GankIssue() {
+        this.items = new ArrayList<GankItem>();
     }
 
     @Override
@@ -73,11 +73,11 @@ public class GankIOIssue {
         this.file = file;
     }
 
-    public List<GankIOItem> getItems() {
+    public List<GankItem> getItems() {
         return items;
     }
 
-    public void setItems(List<GankIOItem> items) {
+    public void setItems(List<GankItem> items) {
         this.items = items;
     }
 }

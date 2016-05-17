@@ -5,15 +5,19 @@ This project is simply modified from another project named [Ganks-for-andoirdwee
 
 This project fetches daily newsletters created by [gank.io](http://gank.io/), which shares technical ganks every weekday.
 
-This project not only parses the post items in one daily issue, but also extracts the main content of each post item's web page for you. Sounds good?
+`Ganks for gank.io` not only parses the post items in one daily issue, but also extracts the main content of each post item's web page for you. Sounds good?
+
+This project also provides a web search API based on Lucene and these ganks, and the web application is now deployed on Heroku platform. [see the site](http://ganks-for-gankio.herokuapp.com/)
+
+**中文简介：`Ganks for gank.io`项目利用Gank的API来获取干货列表，不仅如此，该项目还利用dragnet开源工具提取每一个干货的目标网页内容，最终利用Lucene和干货数据提供一个高效的干货搜索接口，并将其部署在Heroku平台。**
 
 ## Two main models
 
 The models are not changed from [Ganks-for-andoirdweekly.net](https://github.com/hujiaweibujidao/Ganks-for-andoirdweekly.net) in order to make future integration easy.
 
-1. `GankIOIssue` represents a daily issue, eg, `gank.io daily Issue 2016-05-13`
+1. `GankIssue` represents a daily issue, eg, `gank.io daily Issue 2016-05-13`
 
-2. `GankIOItem` represents a daily post item, eg, `MaryPopup - Expand your view with no problem`
+2. `GankItem` represents a daily post item, eg, `MaryPopup - Expand your view with no problem`
 
 ## How to use
 

@@ -8,7 +8,7 @@ import java.util.List;
  * <p>
  * hujiawei 16/4/27
  */
-public class GankIOItem {
+public class GankItem {
 
     private String id;//编号
     private String url;//网址
@@ -20,7 +20,7 @@ public class GankIOItem {
     private String type;//类型
     private List<String> tags;//标签
 
-    public GankIOItem() {
+    public GankItem() {
         tags = new ArrayList<String>();
     }
 
