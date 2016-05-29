@@ -28,7 +28,7 @@ public class GankDataHanlder {
     }
 
     /**
-     * 从文件中加载所有的干货数据
+     * 从文件中加载所有的干货数据W
      */
     public List<GankItem> loadGankItems() {
         List<GankItem> items = getItems();

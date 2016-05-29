@@ -8,11 +8,17 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import model.GankIssue;
 import model.GankItem;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,6 +49,10 @@ public class GankIOAPI {
 
             logger.info("write issues to json file");
             JSON.writeJSONStringTo(issues, new FileWriter(DataHelper.GANKIO_JSON), SerializerFeature.PrettyFormat);
+
+            logger.info("write issues to excel file");//数据量过大会导致保存失败，所以如果出错则取消保存到excel文件中
+            writeItems2Excel(issues, DataHelper.GANKIO_EXCEL);//写入到excel表中，便于查看
+
         } catch (UnirestException | IOException e) {
             e.printStackTrace();
         }
@@ -121,6 +131,75 @@ public class GankIOAPI {
         issue.setTitle("Gank.io #" + num + " (" + date + ")");//Gank.io #2 (2015-03-12)
         logger.info("add issue: " + issue.getTitle());
         return issue;
+    }
+
+    /**
+     * 将weekly item写入到excel文件
+     *
+     * @param issues   周报列表
+     * @param filePath excel文件路径
+     */
+    private static void writeItems2Excel(List<GankIssue> issues, String filePath) throws IOException {
+        List<GankItem> items = new ArrayList<GankItem>();
+        for (GankIssue issue : issues) {
+            items.addAll(issue.getItems());
+        }
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("gankio");
+        String[] heads = new String[]{"id", "source", "type", "title", "shorturl", "tags", "url", "summary"};//"content"
+        Row headRow = sheet.createRow(0);
+
+        for (int i = 0; i < heads.length; i++) {
+            Cell cell = headRow.createCell(i, Cell.CELL_TYPE_STRING);
+            cell.setCellValue(heads[i]);
+        }
+
+        for (int rowNum = 1; rowNum <= items.size(); rowNum++) {
+            GankItem item = items.get(rowNum - 1);
+            Row row = sheet.createRow(rowNum);
+            for (int i = 0; i < heads.length; i++) {
+                Cell cell = row.createCell(i, Cell.CELL_TYPE_STRING);
+                switch (i) {
+                    case 0:
+                        cell.setCellValue(item.getId());
+                        break;
+                    case 1:
+                        cell.setCellValue(item.getSource());
+                        break;
+                    case 2:
+                        cell.setCellValue(item.getType());
+                        break;
+                    case 3:
+                        cell.setCellValue(item.getTitle());
+                        break;
+                    case 4:
+                        cell.setCellValue(item.getShortUrl());
+                        break;
+                    case 5:
+                        cell.setCellValue(item.getTags().toString());
+                        break;
+                    case 6:
+                        cell.setCellValue(item.getUrl());
+                        break;
+                    case 7:
+                        cell.setCellValue(item.getSummary());
+                        break;
+                    //case 8:
+                    //    cell.setCellValue(item.getContent());
+                    //    break;
+                }
+            }
+        }
+
+        for (int i = 0; i < heads.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        FileOutputStream outputStream = new FileOutputStream(filePath);
+        workbook.write(outputStream);
+        outputStream.flush();
+        outputStream.close();
     }
 
 }

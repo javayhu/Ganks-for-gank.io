@@ -9,9 +9,9 @@ This project fetches daily newsletters created by [gank.io](http://gank.io/), wh
 
 This project also provides a web search API based on Lucene and these ganks, and the web application is now deployed on Heroku platform. [see the site](http://gankio.herokuapp.com/)   
 
-Since I'm currently in free plan of Heroku, so this site is 16/24 housr available, good luck!
+Since I'm currently in free plan of Heroku, so this site is 18/24 housr available, good luck!
 
-**中文简介：`Ganks for gank.io`这个项目主要是利用[Gank的API](http://gank.io/api)来获取干货列表，除此之外，该项目还利用[dragnet](https://github.com/seomoz/dragnet)开源工具提取每一个干货的目标网页内容，最终利用[Lucene](http://lucene.apache.org/)和[Spark](http://sparkjava.com/)等开源工具提供一个高效的干货搜索接口，并将其部署在[Heroku](https://www.heroku.com/)平台。**  [网站预览](http://gankio.herokuapp.com/) 
+**中文简介：`Ganks for gank.io`这个项目主要是利用[Gank的API](http://gank.io/api)来获取干货列表，除此之外，该项目还利用[dragnet](https://github.com/seomoz/dragnet)开源工具提取每一个干货的目标网页内容，最终利用[Lucene](http://lucene.apache.org/)和[Spark](http://sparkjava.com/)等开源工具提供一个高效的干货搜索接口，并将其部署在[Heroku](https://www.heroku.com/)平台。**  [网站预览](http://gankio.herokuapp.com/)
 
 **目前我的Heroku账号处于free plan，所以应用每24个小时会有几个小时处于停止状态，所以祝你好运！**
 
@@ -88,9 +88,7 @@ You can find out more interesting usages with the result data. :-)
 
 ## The libraries used
 
-Many famous open source libraries are used in this project, including `crawler4j`,  `fastjson`, `jsoup`, `velocity`, `spark` and so on.
-
-Among these libraries, [dragnet](https://github.com/seomoz/dragnet) is the most important one, it is a Python library used to extract the content of a web page. 
+Many famous open source libraries are used in this project, including `crawler4j`,  `fastjson`, `jsoup`, `velocity`, `spark` and so on. Among these libraries, [dragnet](https://github.com/seomoz/dragnet) is the most important one, it is a Python library used to extract the content of a web page.
 
 ## License
 
