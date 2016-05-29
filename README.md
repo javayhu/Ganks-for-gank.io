@@ -1,3 +1,4 @@
+[![Heroku](https://heroku-badge.herokuapp.com/?app=gankio&style=flat&svg=1)](http://gankio.herokuapp.com/)
 
 # Ganks for gank.io
 
