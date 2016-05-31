@@ -16,6 +16,7 @@ public class DataHelper {
 
     public static final String GANKIO_JSON = "src/main/resources/data/gankio.json";
     public static final String GANKIO_EXCEL = "src/main/resources/data/gankio.xlsx";
+    public static final String GANKIODB = "src/main/resources/gankiodb";
 
     /**
      * 执行dragnetTool.py脚本获取指定url网页中的内容
@@ -133,13 +134,14 @@ public class DataHelper {
         }
     }
 
+    /**
+     * 将之前提取的数据保存到sessiondb中
+     */
+    public void dataRecovery(){
+    }
+
     public static void main(String[] args) {
         try {
-            //System.out.println(isIgnoredType("Videos & Podcasts"));
-            //System.out.println(isIgnoredType("Jobs"));
-            //System.out.println(isIgnoredType("Books"));
-            //System.out.println(isIgnoredUrl("https://google.com/"));
-
             System.out.println(DataHelper.extractContent("https://github.com/seomoz/dragnet"));
             //System.out.println(DataHelper.extractContent("https://moz.com/devblog/dragnet-content-extraction-from-diverse-feature-sets/"));
         } catch (Exception e) {

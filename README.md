@@ -6,15 +6,61 @@
 
 This project fetches daily newsletters created by [gank.io](http://gank.io/), which shares technical ganks(干货) every weekday.
 
-`Ganks for gank.io` not only parses the post items in one daily issue, but also extracts the main content of each post item's web page for you. Sounds good?
+It not only parses the post items in one daily issue, but also extracts the main content of each post item's web page for you. Sounds good?
 
 This project also provides a web search API based on [Lucene](http://lucene.apache.org/) and these ganks, and the web application is now deployed on [Heroku](https://www.heroku.com/) platform. [see the site](http://gankio.herokuapp.com/)   
 
 Since I'm currently in free plan of Heroku, so this site is 18/24 housr available, good luck!
 
 **中文简介：`Ganks for gank.io`这个项目主要是利用[Gank的API](http://gank.io/api)来获取干货列表，除此之外，该项目还利用[dragnet](https://github.com/seomoz/dragnet)等开源工具提取每一个干货的目标网页内容，最终利用[Lucene](http://lucene.apache.org/)和[Spark](http://sparkjava.com/)等开源工具提供一个高效简洁的干货搜索接口，并将其部署在[Heroku](https://www.heroku.com/)平台。**  [网站预览](http://gankio.herokuapp.com/)     
-**目前我的Heroku账号处于free plan，所以应用每24个小时会有几个小时处于停止状态，所以祝你好运！**     
 如果你对我的开发工作感兴趣的话记得在Github上Follow我哟，或者关注[我的博客](http://hujiaweibujidao.github.io/)    
+
+## The website included
+
+The website included is deployed to Heroku, [see the preview site](http://gankio.herokuapp.com/).
+
+The simple website included in this project is just a page showing the statistics information about the ganks, besides that, it provides a web search API based on Lucene and these ganks.      
+You can find out more interesting usages with the result data. :-)
+
+1.Run `mvn exec:java -Dexec.mainClass="web.WebServer`   
+
+2.Open `http://0.0.0.0:4567/` in your browser, and you will see this web page.
+
+![image](gankio.png)
+
+## Set up
+
+Please make sure you have Java、Maven and Python installed.
+
+## How to use
+
+### Option 0
+
+Simply use file `src/main/resources/gankio.json` as the result data, but it will not be auto-updated. 
+
+By the way, for the apps using this project, I will try my best to update the result data as frequent as possible.  
+
+### Option 1
+
+Simply run `update.sh` to get the result data.
+
+### Option 2
+
+Using Maven to compile and run this project
+
+1.Run `mvn compile` to compile this project;  
+
+2.Run `mvn exec:java -Dexec.mainClass="data.GankDataHanlder"` to start loading these posts and generating the final result data.
+
+3.Then you will see the result data in file `src/main/resources/gankio.json` in JSON format.
+
+### Option 3
+
+Build and run this project in your favorite IDE
+
+1.Run `src/main/java/data/GankDataHanlder.java`;  
+
+2.Then you will see the result data in file `src/main/resources/gankio.json` in JSON format.
 
 ## Two main models
 
@@ -23,30 +69,6 @@ The models are not changed from [Ganks-for-andoirdweekly.net](https://github.com
 1. `GankIssue` represents a daily issue, eg, `gank.io daily Issue 2016-05-13`
 
 2. `GankItem` represents a daily post item, eg, `MaryPopup - Expand your view with no problem`
-
-## How to use
-
-### Option 1
-
-Simply use file `src/main/resources/gankio.json` as the result data, but it will not be auto-updated.
-
-### Option 2
-
-Using Maven to compile and run this project
-
-1.Run `mvn compile` to compile this project;  
-
-2.Run `mvn exec:java -Dexec.mainClass="data.GankIOAPI"` to start loading these posts and generating the final result data.
-
-3.Then you will see the result data in file `src/main/resources/gankio.json` in JSON format.
-
-### Option 3
-
-Build and run this project in your favorite IDE
-
-1.Run `src/main/java/data/GankIOAPI.java`;  
-
-2.Then you will see the result data in file `src/main/resources/gankio.json` in JSON format.
 
 ## The result data
 
@@ -79,17 +101,9 @@ The root of the json data is a JSON array containing all the weekly issues poste
 ]
 ```
 
-## The website included
+### Apps using it
 
-The website included is deployed to Heroku, [see the preview site](http://gankio.herokuapp.com/).
-
-The simple website included in this project is just a page showing the statistics information about the ganks, besides that, it provides a web search API based on Lucene and these ganks.      
-You can find out more interesting usages with the result data. :-)
-
-1.Run `mvn exec:java -Dexec.mainClass="web.WebServer`   
-2.Open `http://0.0.0.0:4567/` in your browser, and you will see this web page.
-
-![image](gankio.png)
+[Girl](https://github.com/CoXier/Girl)
 
 ## The libraries used
 

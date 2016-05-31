@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * gankhub项目的核心控制类，用于构建搜索索引，对外提供了一个针对某个关键词进行搜索的功能
+ * 搜索核心控制类，用于构建搜索索引，对外提供了一个针对某个关键词进行搜索的功能
  * <p/>
  * hujiawei 16/5/15
  */
@@ -52,11 +52,11 @@ public class GankHub {
      */
     public void startService() {
         GankDataHanlder hanlder = new GankDataHanlder();
-        List<GankItem> items = hanlder.loadGankItems();
         try {
+            List<GankItem> items = hanlder.loadGankItems();
             buildSearchIndex(items);
             logger.info("gankhub start service");
-        } catch (IOException | ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -117,7 +117,6 @@ public class GankHub {
         }
         writer.close();
 
-        // Now create searcher
         reader = DirectoryReader.open(directory);
         searcher = new IndexSearcher(reader);
     }

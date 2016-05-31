@@ -22,14 +22,6 @@
         </developer>
     </developers>
 
-    <repositories>
-        <!-- sessiondb -->
-        <repository>
-            <id>github.ctriposs.repo</id>
-            <url>https://raw.githubusercontent.com/ctriposs/ctriposs-repo/master/repository/</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <!-- 轻量级javaweb框架 spark -->
         <dependency>
@@ -64,20 +56,6 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>3.13</version>
-        </dependency>
-
-        <!-- 支持持久化的键值对存储 sessiondb -->
-        <dependency>
-            <groupId>com.ctriposs.sdb</groupId>
-            <artifactId>sessdb</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <!-- sessiondb需要的snappy压缩，版本低了会报错  -->
-        <dependency>
-            <groupId>org.xerial.snappy</groupId>
-            <artifactId>snappy-java</artifactId>
-            <version>1.1.2.4</version>
         </dependency>
 
         <!-- http://mvnrepository.com/artifact/org.apache.lucene/lucene-core -->

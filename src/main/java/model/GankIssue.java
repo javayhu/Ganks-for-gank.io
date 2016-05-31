@@ -33,6 +33,23 @@ public class GankIssue {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GankIssue)) return false;
+
+        GankIssue issue = (GankIssue) o;
+
+        if (!id.equals(issue.id)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
     public int getNum() {
         return num;
     }
