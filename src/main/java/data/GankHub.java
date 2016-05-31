@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * gankhub项目的核心控制类
+ * gankhub项目的核心控制类，用于构建搜索索引，对外提供了一个针对某个关键词进行搜索的功能
  * <p/>
  * hujiawei 16/5/15
  */
@@ -55,6 +55,7 @@ public class GankHub {
         List<GankItem> items = hanlder.loadGankItems();
         try {
             buildSearchIndex(items);
+            logger.info("gankhub start service");
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
@@ -64,6 +65,7 @@ public class GankHub {
      * 全文检索
      */
     public List<Document> search(String keyword) throws Exception {
+        logger.info("gankhub search" + keyword);
         // Parse a simple query that searches for "keyword"
         QueryParser parser = new QueryParser(FIELD_TITLE, analyzer);//默认是基于标题的
         Query query = parser.parse(keyword);
@@ -84,6 +86,7 @@ public class GankHub {
         try {
             reader.close();
             directory.close();
+            logger.info("gankhub stop service");
         } catch (IOException e) {
             e.printStackTrace();
         }

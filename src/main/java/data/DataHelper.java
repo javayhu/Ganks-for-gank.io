@@ -18,40 +18,6 @@ public class DataHelper {
     public static final String GANKIO_EXCEL = "src/main/resources/data/gankio.xlsx";
 
     /**
-     * 保存网页内容
-     *
-     * @param fileName 保存的文件
-     * @param content  页面的内容
-     */
-    public static void savePage(String fileName, byte[] content) {
-        File file = new File(fileName);
-        if (file.exists()) {
-            return;//文件如果存在的话那就不保存了
-        }
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(file);
-            fos.write(content);
-            logger.info("成功保存文档 " + fileName);
-        } catch (IOException e) {
-            logger.info("保存文档失败 " + fileName);
-            e.printStackTrace();
-        } finally {
-            try {
-                if (fos != null) {
-                    fos.flush();
-                }
-                if (fos != null) {
-                    fos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
      * 执行dragnetTool.py脚本获取指定url网页中的内容
      * 脚本中设置了10秒的timeout，如果不设置会导致有些请求耗时太长，甚至有些会停止
      * <p>
@@ -131,6 +97,40 @@ public class DataHelper {
             if (type.contains(s)) return true;
         }
         return false;
+    }
+
+    /**
+     * 保存网页内容
+     *
+     * @param fileName 保存的文件
+     * @param content  页面的内容
+     */
+    public static void savePage(String fileName, byte[] content) {
+        File file = new File(fileName);
+        if (file.exists()) {
+            return;//文件如果存在的话那就不保存了
+        }
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file);
+            fos.write(content);
+            logger.info("成功保存文档 " + fileName);
+        } catch (IOException e) {
+            logger.info("保存文档失败 " + fileName);
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fos != null) {
+                    fos.flush();
+                }
+                if (fos != null) {
+                    fos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void main(String[] args) {

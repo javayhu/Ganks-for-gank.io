@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * gank.io api请求类
  * <p/>
- * gank.io具有api访问接口，所以不用去爬取和解析网页，直接调用api即可
+ * gank.io具有api访问接口，所以不用去爬取和解析网页，直接调用api即可，得到的数据会保存到json文件中
  * <p/>
  * hujiawei 16/5/15
  */
@@ -45,13 +45,12 @@ public class GankIOAPI {
             logger.info("load issues from gank.io");
             List<GankIssue> issues = gankIOAPI.loadGankIOIssues();
             gankIOAPI.loadGankIOItems(issues);
-            System.out.println(JSON.toJSONString(issues, true));
 
             logger.info("write issues to json file");
             JSON.writeJSONStringTo(issues, new FileWriter(DataHelper.GANKIO_JSON), SerializerFeature.PrettyFormat);
 
-            logger.info("write issues to excel file");//数据量过大会导致保存失败，所以如果出错则取消保存到excel文件中
-            writeItems2Excel(issues, DataHelper.GANKIO_EXCEL);//写入到excel表中，便于查看
+            //logger.info("write issues to excel file");//数据量过大会导致保存失败，所以如果出错则取消保存到excel文件中
+            //writeItems2Excel(issues, DataHelper.GANKIO_EXCEL);//写入到excel表中，便于查看
 
         } catch (UnirestException | IOException e) {
             e.printStackTrace();

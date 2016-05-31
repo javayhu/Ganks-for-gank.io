@@ -8,15 +8,13 @@ This project fetches daily newsletters created by [gank.io](http://gank.io/), wh
 
 `Ganks for gank.io` not only parses the post items in one daily issue, but also extracts the main content of each post item's web page for you. Sounds good?
 
-This project also provides a web search API based on Lucene and these ganks, and the web application is now deployed on Heroku platform. [see the site](http://gankio.herokuapp.com/)   
+This project also provides a web search API based on [Lucene](http://lucene.apache.org/) and these ganks, and the web application is now deployed on [Heroku](https://www.heroku.com/) platform. [see the site](http://gankio.herokuapp.com/)   
 
 Since I'm currently in free plan of Heroku, so this site is 18/24 housr available, good luck!
 
-**中文简介：`Ganks for gank.io`这个项目主要是利用[Gank的API](http://gank.io/api)来获取干货列表，除此之外，该项目还利用[dragnet](https://github.com/seomoz/dragnet)开源工具提取每一个干货的目标网页内容，最终利用[Lucene](http://lucene.apache.org/)和[Spark](http://sparkjava.com/)等开源工具提供一个高效的干货搜索接口，并将其部署在[Heroku](https://www.heroku.com/)平台。**  [网站预览](http://gankio.herokuapp.com/)
-
-**目前我的Heroku账号处于free plan，所以应用每24个小时会有几个小时处于停止状态，所以祝你好运！**
-
-如果你对我的开发工作感兴趣的话记得在Github上Follow我哟，或者关注[我的博客](http://hujiaweibujidao.github.io/)。
+**中文简介：`Ganks for gank.io`这个项目主要是利用[Gank的API](http://gank.io/api)来获取干货列表，除此之外，该项目还利用[dragnet](https://github.com/seomoz/dragnet)等开源工具提取每一个干货的目标网页内容，最终利用[Lucene](http://lucene.apache.org/)和[Spark](http://sparkjava.com/)等开源工具提供一个高效简洁的干货搜索接口，并将其部署在[Heroku](https://www.heroku.com/)平台。**  [网站预览](http://gankio.herokuapp.com/)     
+**目前我的Heroku账号处于free plan，所以应用每24个小时会有几个小时处于停止状态，所以祝你好运！**     
+如果你对我的开发工作感兴趣的话记得在Github上Follow我哟，或者关注[我的博客](http://hujiaweibujidao.github.io/)    
 
 ## Two main models
 
@@ -28,9 +26,13 @@ The models are not changed from [Ganks-for-andoirdweekly.net](https://github.com
 
 ## How to use
 
-(1) Simply use file `src/main/resources/gankio.json` as the result data, but it will not auto update, the latest weekly issue in this json file is 2016-05-13 for now.
+### Option 1
 
-(2) Using Maven to compile and run this project
+Simply use file `src/main/resources/gankio.json` as the result data, but it will not be auto-updated.
+
+### Option 2
+
+Using Maven to compile and run this project
 
 1.Run `mvn compile` to compile this project;  
 
@@ -38,7 +40,9 @@ The models are not changed from [Ganks-for-andoirdweekly.net](https://github.com
 
 3.Then you will see the result data in file `src/main/resources/gankio.json` in JSON format.
 
-(3) Build and run this project in your favorite IDE
+### Option 3
+
+Build and run this project in your favorite IDE
 
 1.Run `src/main/java/data/GankIOAPI.java`;  
 
