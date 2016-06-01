@@ -14,6 +14,7 @@ import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 import org.slf4j.Logger;
@@ -71,9 +72,12 @@ public class GankHub {
         Query query = parser.parse(keyword);
 
         List<Document> documents = new ArrayList<>();
-        ScoreDoc[] hitdocs = searcher.search(query, 10).scoreDocs;
-        for (ScoreDoc hitdoc : hitdocs) {
-            documents.add(searcher.doc(hitdoc.doc));
+        TopDocs topdocs = null;
+        if ((topdocs = searcher.search(query, 10)) != null) {
+            ScoreDoc[] hitdocs = topdocs.scoreDocs;//NullPointerException
+            for (ScoreDoc hitdoc : hitdocs) {
+                documents.add(searcher.doc(hitdoc.doc));
+            }
         }
 
         return documents;
