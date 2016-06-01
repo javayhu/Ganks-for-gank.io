@@ -66,14 +66,12 @@ public class GankHub {
      * 全文检索
      */
     public List<Document> search(String keyword) throws Exception {
-        logger.info("gankhub search" + keyword);
-        // Parse a simple query that searches for "keyword"
         QueryParser parser = new QueryParser(FIELD_TITLE, analyzer);//默认是基于标题的
         Query query = parser.parse(keyword);
 
         List<Document> documents = new ArrayList<>();
         TopDocs topdocs = null;
-        if ((topdocs = searcher.search(query, 10)) != null) {
+        if ((topdocs = searcher.search(query, 20)) != null) {
             ScoreDoc[] hitdocs = topdocs.scoreDocs;//NullPointerException
             for (ScoreDoc hitdoc : hitdocs) {
                 documents.add(searcher.doc(hitdoc.doc));
