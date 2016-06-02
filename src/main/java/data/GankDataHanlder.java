@@ -19,7 +19,6 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,7 +34,7 @@ public class GankDataHanlder {
         GankDataHanlder hanlder = new GankDataHanlder();
         List<GankItem> items = null;
         try {
-            items = hanlder.loadGankItems();
+            items = hanlder.loadGankItems(true);//在本地更新的话需要加载远端的
             System.out.println("gank items count=" + items.size());
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,35 +42,37 @@ public class GankDataHanlder {
     }
 
     /**
-     * 从文件中加载所有的干货数据
+     * 从文件中加载所有的干货数据，如果flag=true的话，远端有更新的话也需要加载
      */
-    public List<GankItem> loadGankItems() throws Exception {
+    public List<GankItem> loadGankItems(boolean flag) throws Exception {
         List<GankIssue> localIssues = getIssues();//得到本地的干货日报列表
-        GankIOAPI gankIOAPI = new GankIOAPI();
-        List<GankIssue> remoteIssues = gankIOAPI.loadGankIOIssues();//远端的最新的日报列表
 
-        //远端的日报列表有更新了，那么就加载新的数据并添加到本地缓存的数据中，最后再保存起来
-        if (localIssues != null && remoteIssues != null && remoteIssues.size() > localIssues.size()) {
-            logger.info("remote issues list update");
-            List<GankIssue> newIssues = new ArrayList<>();
-            for (GankIssue issue : remoteIssues) {
-                if (!localIssues.contains(issue)) {
-                    newIssues.add(issue);
+        if (flag) {
+            GankIOAPI gankIOAPI = new GankIOAPI();
+            List<GankIssue> remoteIssues = gankIOAPI.loadGankIOIssues();//远端的最新的日报列表
+
+            //远端的日报列表有更新了，那么就加载新的数据并添加到本地缓存的数据中，最后再保存起来
+            if (localIssues != null && remoteIssues != null && remoteIssues.size() > localIssues.size()) {
+                logger.info("remote issues list update");
+                List<GankIssue> newIssues = new ArrayList<>();
+                for (GankIssue issue : remoteIssues) {
+                    if (!localIssues.contains(issue)) {
+                        newIssues.add(issue);
+                    }
                 }
+
+                logger.info("load updated issues " + newIssues.toString());
+                gankIOAPI.loadGankIOItems(newIssues);
+
+                //本地的加上新获取的
+                localIssues.addAll(0, newIssues);
+
+                logger.info("write issues to json file");
+                JSON.writeJSONStringTo(localIssues, new FileWriter(DataHelper.GANKIO_JSON), SerializerFeature.PrettyFormat);
+
+                //logger.info("write issues to excel file");//数据量过大会导致保存失败，所以如果出错则取消保存到excel文件中
+                //writeItems2Excel(issues, DataHelper.GANKIO_EXCEL);//写入到excel表中，便于查看
             }
-
-            logger.info("load updated issues " + newIssues.toString());
-            gankIOAPI.loadGankIOItems(newIssues);
-
-            //本地的加上新获取的 
-            Collections.reverse(newIssues);//先倒序一下
-            localIssues.addAll(newIssues);
-
-            logger.info("write issues to json file");
-            JSON.writeJSONStringTo(localIssues, new FileWriter(DataHelper.GANKIO_JSON), SerializerFeature.PrettyFormat);
-
-            //logger.info("write issues to excel file");//数据量过大会导致保存失败，所以如果出错则取消保存到excel文件中
-            //writeItems2Excel(issues, DataHelper.GANKIO_EXCEL);//写入到excel表中，便于查看
         }
         //这里可以做一些其他的处理，例如item的内容处理、item的过滤或者删除内容为空的item等，暂时保留该方法
 

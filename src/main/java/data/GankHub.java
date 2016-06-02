@@ -54,7 +54,7 @@ public class GankHub {
     public void startService() {
         GankDataHanlder hanlder = new GankDataHanlder();
         try {
-            List<GankItem> items = hanlder.loadGankItems();
+            List<GankItem> items = hanlder.loadGankItems(false);//在服务器端启动的话不需要加载远端的
             buildSearchIndex(items);
             logger.info("gankhub start service");
         } catch (Exception e) {
