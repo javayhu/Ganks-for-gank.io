@@ -6,8 +6,6 @@ mvn compile
 
 mvn exec:java -Dexec.mainClass="data.GankDataHanlder"
 
-echo 'update stops'
-
 echo 'git starts'
 
 git add .
